@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Confirm Delete Account</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header flex-row" id="game_header">
+            <h2>Welcome, {{ current_user.first_name }}!</h2>
+            <p><a href="/user/">Profile</a> | <a href="/game/">Game</a> | <a href="/jackpots/">Jackpots</a> | <a href="/logout/">Log Out</a></p>
+        </div>
+        {% if messages %}
+        <div class="flex-row">
+            <div class="flex-box" id="message_div">
+                <ul id="messages">
+                    {% for msg in messages %}
+                    <li{% if msg.tags %} class="{{msg.tags}}"{% endif %}>{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <div class="flex-row">
+            <div class="flex-box">
+                <p>Are you sure you wish to delete your account? This action cannot be undone!</p>
+                <form action="/user/destroy/" method="POST">
+                    {% csrf_token %}
+                    <label for="pw"><p>Please enter your password to confirm.</p></label>
+                    <input type="password" name="pw" id="pw">
+                    <button type="submit" id="submit_button">Delete my account!</button>
+                </form> 
+                <p><a href="/user/">Go Back</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

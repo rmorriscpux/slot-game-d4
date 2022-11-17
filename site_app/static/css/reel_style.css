@@ -1,0 +1,82 @@
+div.reel-window{
+    background-color: #00007f;
+    display: flex;
+    width: 100%;
+    padding: 20px 160px 20px;
+}
+div.reel{
+    position: relative;
+    background-color: #ffffff;
+    flex: 1;
+    display: block;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 5px;
+    min-height: 40px;
+}
+div.reel-dashboard{
+    justify-content: center;
+    z-index: 3;
+}
+#toggle_button{
+    justify-content: center;
+    text-align: center;
+    background-color: #00007f;
+    padding: 5px;
+}
+#toggle_button button{
+    font-size: 18px;
+}
+#game_glass{
+    background-color: #00007f;
+    display: none;
+}
+#dashboard{
+    width: 100%;
+    text-align: center;
+    background-color: #00007f;
+    color: #ffffff;
+}
+#dashboard td{
+    border: 1px solid white;
+    border-radius: 7px;
+    font-size: 24pt;
+}
+#dashboard button{
+    font-size: 24pt;
+}
+#dashboard input{
+    font-size: 24pt;
+    width: 24pt;
+    background-color: #00007f;
+    color: #ffffff;
+    text-align: center;
+    border-width: 0px 1px;
+}
+#dashboard input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+#dashboard input[type=number]::-webkit-inner-spin-button, 
+#dashboard input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
+#dashboard-button{
+    width: 10%;
+}
+img.reel_symbol{
+    width: 100%;
+}
+img.reel_lines{
+    position: absolute;
+    z-index: 2;
+    height: 700px;
+    width: 1000px;
+    object-fit: cover;
+    object-position: 100% 0%;
+}
+a.line-button{
+    color: #ffffff;
+    text-decoration: none;
+}

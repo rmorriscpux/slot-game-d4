@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/user.js' %}"></script>
+    <title>User Page</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flex-row header">
+            <h2>Welcome, {{ user_first_name }}!</h2>
+            <p><a href="/game/">Game</a> | <a href="/jackpots/">Jackpots</a> | <a href="/logout/">Log Out</a></p>
+        </div>
+        {% if messages %}
+        <div class="flex-row">
+            <ul id="site_messages">
+                {% for msg in messages %}
+                <li{% if msg.tags %} class="{{ msg.tags }}"{% endif %}>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="flex-row">
+            <div class="flex-box" id="user_data">
+                <h2>{{ username }}</h2>
+                <p>{{ user_first_name }} {{ user_last_name }}</p>
+                <p>{{ user_email }}</p>
+                <hr>
+                <h2>Statistics</h2>
+                <table>
+                    <tr>
+                        <td>Credit Balance:</td>
+                        <td>{{ user_credit_balance }}</td>
+                    </tr>
+                    <tr>
+                        <td>Games Played:</td>
+                        <td>{{ user_games_played }}</td>
+                    </tr>
+                    <tr>
+                        <td>Credits Played:</td>
+                        <td>{{ user_credits_played }}</td>
+                    </tr>
+                    <tr>
+                        <td>Credits Won:</td>
+                        <td>{{ user_credits_won }}</td>
+                    </tr>
+                </table>
+                <hr>
+                <h2>Options</h2>
+                <div class="flex-row">
+                    <div class="flex-box">
+                        <p><a href="/user/history/">View Play History</a></p>
+                    </div>
+                    <div class="flex-box">
+                        <form action="/user/add_credit/" method="POST">
+                            {% csrf_token %}
+                            <label for="amount"><h3>ADD CREDITS - 100 Max</h3></label>
+                            <input type="number" name="amount" id="amount" min="1" max="100">
+                            <button type="submit" id="add_amount">Add</button>
+                        </form>
+                    </div>
+                    <div class="flex-box">
+                        <p><a href="/user/confirm_delete/">Delete Account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

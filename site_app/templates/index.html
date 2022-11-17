@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Slot Game - Register/Login</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flex-row header">
+            <h1>Slot Game</h1>
+        </div>
+        {% if messages %}
+        <div class="flex-row">
+            <ul id="site_messages">
+                {% for msg in messages %}
+                <li{% if msg.tags %} class="{{ msg.tags }}"{% endif %}>{{ msg }}{% if msg.tags == "warning" %} | <a href="/user/">Profile</a> | <a href="/game/">Game</a> | <a href="/logout/">Log Out</a>{% endif %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="flex-row">
+            <div class="flex-box">
+                <h2>Registration</h2>
+                <form action="/register/" method="POST">
+                    {% csrf_token %}
+                    <table class="form-table">
+                        <tr>
+                            <td class="category">Username</td>
+                            <td class="form_input"><input type="text" name="username" id="reg_username" maxlength="45"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">Password</td>
+                            <td class="form_input"><input type="password" name="pw" id="reg_pw" maxlength="255"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">Confirm PW</td>
+                            <td class="form_input"><input type="password" name="confirm_pw" id="reg_confirm_pw" maxlength="255"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">Email Address</td>
+                            <td class="form_input"><input type="text" name="email" id="reg_email" maxlength="255"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">First Name</td>
+                            <td class="form_input"><input type="text" name="first_name" id="reg_first_name" maxlength="45"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">Last Name</td>
+                            <td class="form_input"><input type="text" name="last_name" id="reg_last_name" maxlength="45"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">D.O.B.</td>
+                            <td class="form_input"><input type="date" name="dob" id="reg_dob"></td>
+                        </tr>
+                        <tr>
+                            <td class="form_button" colspan="2"><button type="submit" id="reg_submit">Register</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="flex-box">
+                <h2>Login</h2>
+                <form action="/login/" method="POST">
+                    {% csrf_token %}
+                    <table class="form-table">
+                        <tr>
+                            <td class="category">Username</td>
+                            <td class="form_input"><input type="text" name="username" id="login_username" maxlength="45"></td>
+                        </tr>
+                        <tr>
+                            <td class="category">Password</td>
+                            <td class="form_input"><input type="password" name="pw" id="login_pw" maxlength="255"></td>
+                        </tr>
+                        <tr>
+                            <td class="form_button" colspan="2"><button type="submit" id="login_submit">Login</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

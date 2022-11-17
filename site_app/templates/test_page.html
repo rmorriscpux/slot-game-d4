@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load site_app_extras %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reel_style.css' %}">
+    <!-- <style>
+        div.flex-row{
+            display: flex;
+            justify-content: center;
+            width: 1000px;
+        }
+        div.reel_window{
+            background-color: #00007f;
+            display: flex;
+            width: 100%;
+            padding: 20px 160px 20px;
+        }
+        div.reel{
+            position: relative;
+            background-color: #ffffff;
+            flex: 1;
+            display: block;
+            justify-content: center;
+            border: 1px solid black;
+            margin: 5px;
+            min-height: 40px;
+        }
+        div.reel-dashboard{
+            justify-content: center;
+        }
+        #dashboard{
+            width: 100%;
+            text-align: center;
+            background-color: #00007f;
+            color: #ffffff;
+        }
+        #dashboard td{
+            border: 1px solid white;
+            border-radius: 7px;
+            font-size: 24pt;
+        }
+        #dashboard button{
+            font-size: 24pt;
+        }
+        #dashboard-button{
+            width: 10%;
+        }
+        img.reel_symbol{
+            width: 100%;
+        }
+        img.reel_lines{
+            position: absolute;
+            z-index: 2;
+        }
+    </style> -->
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <img alt="{{ symbol }}" src="{% static 'img/slot_symbols/'|add:symbol|add:'.png' %}">
+        <div class="flex-row">
+            <img alt="lines" src="{% static 'img/lines/'|addstr:played|addstr:'.png' %}" class="reel_lines">
+            <div class="reel-window flex-box">
+                {% for reel in window %}
+                <div class="reel">
+                    {% for pos_sym in reel %}
+                    <img alt="{{ pos_sym }}" src="{% static 'img/slot_symbols/'|addstr:pos_sym|addstr:'.png' %}" class="reel_symbol">
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex-row reel-dashboard">
+            <table id="dashboard">
+                <tr>
+                    <td>12345</td>
+                    <td>{{ played }}</td>
+                    <td>{{ total_won }}</td>
+                    <td rowspan="2" id="dashboard-button"><button>Play</button></td>
+                </tr>
+                <tr>
+                    <td>Credit</td>
+                    <td>Lines</td>
+                    <td>Win</td>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-row">
+            <div class="flex-box">
+                <p>Played: {{ played }}</p>
+                <p>Won: {{ total_won }}</p>
+                {% if wins %}
+                <ul id="winlist">
+                    {% for line, amt in wins.items %}
+                    <li>{{ line }} Pays {{ amt }}.</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

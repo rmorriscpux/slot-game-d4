@@ -1,0 +1,63 @@
+body{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* div */
+div.wrapper{
+    width: 1000px;
+    display: block;
+}
+div.flex-row{
+    display: flex;
+    width: 100%;
+}
+div.flex-box{
+    flex: 1;
+}
+div.arrow-box{
+    padding: 20px;
+}
+div.header{
+    justify-content: space-between;
+}
+div.jp-item-1{
+    margin: 0px;
+    padding: 1px 10px;
+    background-color: #cccccc;
+    min-height: 110px;
+}
+div.jp-item-2{
+    margin: 0px;
+    padding: 1px 10px;
+    background-color: #eeeeee;
+    min-height: 110px;
+}
+#jackpot_list{
+    border: 1px solid black;
+}
+#game_stats{
+    flex: 2;
+}
+#user_data{
+    text-align: center;
+    align-content: center;
+}
+#user_data table{
+    margin: auto;
+}
+/* li */
+li.error{
+    color: #ff0000;
+}
+li.success{
+    color: #007f00;
+}
+/* img */
+img.arrow{
+    width: 100%;
+}
+#paytable{
+    width: 100%;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load site_app_extras %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Top Award History</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header flex-row" id="game_header">
+            <h2>Welcome, {{ current_user.first_name }}!</h2>
+            <p><a href="/user/">Profile</a> | <a href="/game/">Game</a> | <a href="/logout/">Log Out</a></p>
+        </div>
+        <div class="flex-row">
+            <div class="flex-box" id="page_list">
+                <h1>Jackpot Hits</h1>
+                <p>
+                    {% if current_page == 1 %}
+                    «
+                    {% else %}
+                    <a href="/jackpots/?page={{ current_page|getprev }}">«</a>
+                    {% endif %}
+                    {% for pagenum in page_range %}
+                        {% if pagenum == "..." or pagenum == current_page %}
+                        {{ pagenum }}
+                        {% else %}
+                        <a href="/jackpots/?page={{ pagenum }}">{{ pagenum }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if current_page == num_pages %}
+                    »
+                    {% else %}
+                    <a href="/jackpots/?page={{ current_page|getnext }}">»</a>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="flex-row">
+            <div class="flex-box" id="jackpot_list">
+                {% for jp in display_jackpots %}
+                <div class="{% cycle 'jp-item-1' 'jp-item-2' %}">
+                    <p>
+                        {{ jp.awarded_to.username }} hit on {{ jp.created_at }}!
+                        {% if current_user != jp.awarded_to %}
+                            {% if current_user in jp.liked_by.all %}
+                            <br>Kudos Given!
+                            <form action="/jackpots/undo_kudos/{{ jp.id }}/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="redirect_page" value="{{ current_page }}">
+                                <button type="submit">Undo</button>
+                            </form>
+                            {% else %}
+                                <form action="/jackpots/kudos/{{ jp.id }}/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="redirect_page" value="{{ current_page }}">
+                                <button type="submit">Give Kudos!</button>
+                            </form>
+                            {% endif %}
+                        {% endif %}
+                    </p>
+                </div>
+                {% empty %}
+                <p>No jackpots yet! <a href="/game/">Try and hit one!</a></p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
